@@ -1,15 +1,15 @@
 use std::fmt::Display;
 
+use crate::RunArgs;
 use crate::tensor::TensorType;
 use crate::tensor::{ValTensor, VarTensor};
-use crate::RunArgs;
 use halo2_proofs::plonk::{Column, ConstraintSystem, Instance};
 use halo2curves::ff::PrimeField;
 use itertools::Itertools;
 use log::debug;
 #[cfg(feature = "python-bindings")]
 use pyo3::{
-    exceptions::PyValueError, FromPyObject, IntoPy, PyObject, PyResult, Python, ToPyObject,
+    FromPyObject, IntoPy, PyObject, PyResult, Python, ToPyObject, exceptions::PyValueError,
 };
 use serde::{Deserialize, Serialize};
 #[cfg(all(feature = "ezkl", not(target_arch = "wasm32")))]

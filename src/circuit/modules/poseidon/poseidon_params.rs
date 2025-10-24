@@ -912,16 +912,16 @@ pub(crate) const ROUND_CONSTANTS: [[Fp; 2]; 64] = [
         ]),
     ],
 ]; // n: 254
-   // t: 5
-   // N: 1270
-   // Result Algorithm 1:
-   // [True, 0]
-   // Result Algorithm 2:
-   // [True, None]
-   // Result Algorithm 3:
-   // [True, None]
-   // Prime number: 0x0x30644e72e131a029b85045b68181585d2833e84879b9709143e1f593f0000001
-   // MDS matrix:
+// t: 5
+// N: 1270
+// Result Algorithm 1:
+// [True, 0]
+// Result Algorithm 2:
+// [True, None]
+// Result Algorithm 3:
+// [True, None]
+// Prime number: 0x0x30644e72e131a029b85045b68181585d2833e84879b9709143e1f593f0000001
+// MDS matrix:
 pub(crate) const MDS: [[Fp; 2]; 2] = [
     [
         Fp::from_raw([

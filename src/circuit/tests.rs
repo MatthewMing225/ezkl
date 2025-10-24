@@ -1964,11 +1964,11 @@ mod add_with_overflow_and_poseidon {
     use halo2curves::bn256::Fr;
 
     use crate::circuit::modules::{
-        poseidon::{
-            spec::{PoseidonSpec, POSEIDON_RATE, POSEIDON_WIDTH},
-            PoseidonChip, PoseidonConfig,
-        },
         Module, ModulePlanner,
+        poseidon::{
+            PoseidonChip, PoseidonConfig,
+            spec::{POSEIDON_RATE, POSEIDON_WIDTH, PoseidonSpec},
+        },
     };
 
     use super::*;

@@ -1,14 +1,14 @@
 use std::collections::HashMap;
 
-use criterion::{criterion_group, criterion_main, BenchmarkId, Criterion, Throughput};
-use ezkl::circuit::modules::poseidon::spec::{PoseidonSpec, POSEIDON_RATE, POSEIDON_WIDTH};
-use ezkl::circuit::modules::poseidon::{PoseidonChip, PoseidonConfig};
+use criterion::{BenchmarkId, Criterion, Throughput, criterion_group, criterion_main};
 use ezkl::circuit::modules::Module;
+use ezkl::circuit::modules::poseidon::spec::{POSEIDON_RATE, POSEIDON_WIDTH, PoseidonSpec};
+use ezkl::circuit::modules::poseidon::{PoseidonChip, PoseidonConfig};
 use ezkl::circuit::*;
+use ezkl::pfsys::TranscriptType;
 use ezkl::pfsys::create_keys;
 use ezkl::pfsys::create_proof_circuit;
 use ezkl::pfsys::srs::gen_srs;
-use ezkl::pfsys::TranscriptType;
 use ezkl::tensor::*;
 use halo2_proofs::circuit::Value;
 use halo2_proofs::poly::kzg::commitment::KZGCommitmentScheme;

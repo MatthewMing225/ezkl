@@ -10,12 +10,12 @@ use halo2_proofs::{
     plonk::{Circuit, ConstraintSystem},
 };
 use halo2_wrong_ecc::{
+    EccConfig,
     integer::rns::Rns,
     maingate::{
         MainGate, MainGateConfig, MainGateInstructions, RangeChip, RangeConfig, RangeInstructions,
         RegionCtx,
     },
-    EccConfig,
 };
 use halo2curves::bn256::{Bn256, Fq, Fr, G1Affine};
 use halo2curves::ff::PrimeField;
@@ -24,16 +24,16 @@ use itertools::Itertools;
 use log::debug;
 use log::trace;
 use rand::rngs::OsRng;
-use snark_verifier::loader::native::NativeLoader;
 use snark_verifier::loader::EcPointLoader;
+use snark_verifier::loader::native::NativeLoader;
 use snark_verifier::{
     loader,
     pcs::{
+        AccumulationScheme, AccumulationSchemeProver,
         kzg::{
             Bdfg21, KzgAccumulator, KzgAs, KzgSuccinctVerifyingKey, LimbsEncoding,
             LimbsEncodingInstructions,
         },
-        AccumulationScheme, AccumulationSchemeProver,
     },
     system,
     util::arithmetic::fe_to_limbs,
@@ -138,15 +138,14 @@ pub fn aggregate<'a>(
             .map_err(|_| plonk::Error::Synthesis)?;
 
         if split_proofs {
-            let previous_proof = proofs.last();
-            let split_commit = match snark.clone().split {
-                Some(split) => split,
-                None => {
-                    log::error!("Failed to split KZG commit for sequential proofs");
-                    return Err(plonk::Error::Synthesis);
-                }
-            };
-            if let Some(previous_proof) = previous_proof {
+            if let Some(previous_proof) = proofs.last() {
+                let split_commit = match snark.clone().split {
+                    Some(split) => split,
+                    None => {
+                        log::error!("Failed to split KZG commit for sequential proofs");
+                        return Err(plonk::Error::Synthesis);
+                    }
+                };
                 // output of previous proof
                 let output = &previous_proof.witnesses[split_commit.start..split_commit.end];
                 // input of current proof

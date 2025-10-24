@@ -1,6 +1,6 @@
 use thiserror::Error;
 
-use super::{ops::DecompositionError, DataFormat};
+use super::{DataFormat, ops::DecompositionError};
 
 /// A wrapper for tensor related errors.
 #[derive(Debug, Error)]

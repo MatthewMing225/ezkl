@@ -1,14 +1,14 @@
 use crate::{
     circuit::modules::{
+        Module,
         polycommit::PolyCommitChip,
         poseidon::{
-            spec::{PoseidonSpec, POSEIDON_RATE, POSEIDON_WIDTH},
             PoseidonChip,
+            spec::{POSEIDON_RATE, POSEIDON_WIDTH, PoseidonSpec},
         },
-        Module,
     },
     fieldutils::{felt_to_integer_rep, integer_rep_to_felt},
-    graph::{quantize_float, scale_to_multiplier, GraphCircuit, GraphSettings},
+    graph::{GraphCircuit, GraphSettings, quantize_float, scale_to_multiplier},
 };
 use console_error_panic_hook;
 use halo2_proofs::{
@@ -24,9 +24,9 @@ use wasm_bindgen::prelude::*;
 use wasm_bindgen_console_logger::DEFAULT_LOGGER;
 
 use crate::bindings::universal::{
-    compiled_circuit_validation, encode_verifier_calldata, gen_pk, gen_vk, gen_witness,
-    input_validation, pk_validation, proof_validation, settings_validation, srs_validation,
-    verify_aggr, vk_validation, witness_validation, EZKLError as ExternalEZKLError,
+    EZKLError as ExternalEZKLError, compiled_circuit_validation, encode_verifier_calldata, gen_pk,
+    gen_vk, gen_witness, input_validation, pk_validation, proof_validation, settings_validation,
+    srs_validation, verify_aggr, vk_validation, witness_validation,
 };
 #[cfg(feature = "web")]
 pub use wasm_bindgen_rayon::init_thread_pool;

@@ -7,8 +7,8 @@ use halo2curves::ff::Field;
 
 use halo2_proofs::{
     circuit::{
-        layouter::{RegionColumn, RegionLayouter, RegionShape, SyncDeps, TableLayouter},
         Cell, Layouter, Region, RegionIndex, RegionStart, Table, Value,
+        layouter::{RegionColumn, RegionLayouter, RegionShape, SyncDeps, TableLayouter},
     },
     plonk::{
         Advice, Any, Assigned, Assignment, Challenge, Circuit, Column, Error, Fixed, FloorPlanner,

@@ -1,7 +1,7 @@
-use crate::circuit::modules::polycommit::{PolyCommitChip, PolyCommitConfig};
-use crate::circuit::modules::poseidon::spec::{PoseidonSpec, POSEIDON_RATE, POSEIDON_WIDTH};
-use crate::circuit::modules::poseidon::{PoseidonChip, PoseidonConfig};
 use crate::circuit::modules::Module;
+use crate::circuit::modules::polycommit::{PolyCommitChip, PolyCommitConfig};
+use crate::circuit::modules::poseidon::spec::{POSEIDON_RATE, POSEIDON_WIDTH, PoseidonSpec};
+use crate::circuit::modules::poseidon::{PoseidonChip, PoseidonConfig};
 use crate::circuit::region::ConstantsMap;
 use crate::tensor::{Tensor, ValTensor};
 use halo2_proofs::circuit::Layouter;

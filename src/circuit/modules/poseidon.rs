@@ -9,7 +9,7 @@ pub mod spec;
 
 // This chip adds a set of advice columns to the gadget Chip to store the inputs of the hash
 use halo2_gadgets::poseidon::{
-    primitives::VariableLength, primitives::*, Hash, Pow5Chip, Pow5Config,
+    Hash, Pow5Chip, Pow5Config, primitives::VariableLength, primitives::*,
 };
 use halo2_proofs::halo2curves::bn256::Fr as Fp;
 use halo2_proofs::{circuit::*, plonk::*};
@@ -19,8 +19,8 @@ use std::marker::PhantomData;
 use crate::circuit::region::ConstantsMap;
 use crate::tensor::{Tensor, ValTensor, ValType};
 
-use super::errors::ModuleError;
 use super::Module;
+use super::errors::ModuleError;
 
 /// The number of instance columns used by the Poseidon hash function
 pub const NUM_INSTANCE_COLUMNS: usize = 1;
@@ -404,7 +404,7 @@ mod tests {
     use crate::circuit::modules::ModulePlanner;
 
     use super::{
-        spec::{PoseidonSpec, POSEIDON_RATE, POSEIDON_WIDTH},
+        spec::{POSEIDON_RATE, POSEIDON_WIDTH, PoseidonSpec},
         *,
     };
 

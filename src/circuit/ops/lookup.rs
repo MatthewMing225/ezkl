@@ -3,7 +3,7 @@ use serde::{Deserialize, Serialize};
 
 use crate::{
     circuit::{layouts, table::Range, utils},
-    fieldutils::{felt_to_integer_rep, integer_rep_to_felt, IntegerRep},
+    fieldutils::{IntegerRep, felt_to_integer_rep, integer_rep_to_felt},
     tensor::{self, Tensor, TensorError, TensorType},
 };
 

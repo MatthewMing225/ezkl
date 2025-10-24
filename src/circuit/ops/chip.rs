@@ -25,7 +25,7 @@ use crate::{
 };
 use std::{collections::BTreeMap, marker::PhantomData};
 
-use super::{lookup::LookupOp, region::RegionCtx, CircuitError, Op};
+use super::{CircuitError, Op, lookup::LookupOp, region::RegionCtx};
 use halo2curves::ff::{Field, PrimeField};
 
 #[allow(missing_docs)]

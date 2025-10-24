@@ -1,3 +1,6 @@
+/// Caching helpers
+pub mod cache;
+
 /// EVM related proving and verification
 pub mod evm;
 
@@ -17,7 +20,8 @@ use crate::{Commitments, EZKL_BUF_CAPACITY, EZKL_KEY_FORMAT};
 use clap::ValueEnum;
 use halo2_proofs::circuit::Value;
 use halo2_proofs::plonk::{
-    Circuit, ProvingKey, VerifyingKey, create_proof, keygen_pk, keygen_vk_custom, verify_proof,
+    Circuit, ProverCircuit, ProvingKey, VerifyingKey, create_proof, keygen_pk, keygen_vk_custom,
+    verify_proof,
 };
 use halo2_proofs::poly::VerificationStrategy;
 use halo2_proofs::poly::commitment::{CommitmentScheme, Params, ParamsProver, Prover, Verifier};
@@ -557,7 +561,7 @@ where
 pub fn create_proof_circuit<
     'params,
     Scheme: CommitmentScheme,
-    C: Circuit<Scheme::Scalar>,
+    C: ProverCircuit<Scheme::Scalar>,
     P: Prover<'params, Scheme>,
     V: Verifier<'params, Scheme>,
     Strategy: VerificationStrategy<'params, Scheme, V>,
@@ -585,6 +589,7 @@ where
         + WithSmallOrderMulGroup<3>,
     Scheme::Curve: Serialize + DeserializeOwned + SerdeObject,
     Scheme::ParamsProver: Send + Sync,
+    C::Config: Send + Sync,
 {
     let strategy = Strategy::new(params.verifier_params());
     let mut transcript = TranscriptWriterBuffer::<_, Scheme::Curve, _>::init(vec![]);

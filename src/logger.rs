@@ -1,8 +1,9 @@
 use colored::*;
-use env_logger::Builder;
+use env_logger::{Builder, Target, WriteStyle};
 use log::{Level, LevelFilter, Record};
 use std::env;
 use std::fmt::Formatter;
+use std::fs::OpenOptions;
 use std::io::Write;
 
 /// sets the log level color
@@ -69,6 +70,26 @@ pub fn format(buf: &mut Formatter, record: &Record<'_>) -> Result<(), std::fmt::
 pub fn init_logger() {
     let mut builder = Builder::new();
 
+    let mut write_style = WriteStyle::Always;
+    if let Ok(path) = env::var("EZKL_LOG_FILE") {
+        match OpenOptions::new().create(true).append(true).open(&path) {
+            Ok(file) => {
+                builder.target(Target::Pipe(Box::new(file)));
+                write_style = WriteStyle::Never;
+                colored::control::set_override(false);
+            }
+            Err(err) => {
+                eprintln!(
+                    "Failed to open EZKL_LOG_FILE={} ({}). Falling back to stdout logging.",
+                    path, err
+                );
+                builder.target(Target::Stdout);
+            }
+        }
+    } else {
+        builder.target(Target::Stdout);
+    }
+
     builder.format(move |buf, record| {
         writeln!(
             buf,
@@ -84,8 +105,8 @@ pub fn init_logger() {
                 .replace('\n', &format!("\n{} ", " | ".white().bold()))
         )
     });
-    builder.target(env_logger::Target::Stdout);
     builder.filter(None, LevelFilter::Info);
+    builder.write_style(write_style);
     if env::var("RUST_LOG").is_ok() {
         builder.parse_filters(&env::var("RUST_LOG").unwrap());
     }

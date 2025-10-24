@@ -14,14 +14,14 @@ use super::VarScales;
 use super::Visibility;
 
 // Import operation types for different circuit components
-use crate::circuit::hybrid::HybridOp;
-use crate::circuit::lookup::LookupOp;
-use crate::circuit::poly::PolyOp;
 use crate::circuit::CircuitError;
 use crate::circuit::Constant;
 use crate::circuit::Input;
 use crate::circuit::Op;
 use crate::circuit::Unknown;
+use crate::circuit::hybrid::HybridOp;
+use crate::circuit::lookup::LookupOp;
+use crate::circuit::poly::PolyOp;
 
 // Import graph error types for EZKL
 #[cfg(all(feature = "ezkl", not(target_arch = "wasm32")))]

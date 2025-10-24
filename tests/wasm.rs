@@ -7,10 +7,10 @@ mod wasm32 {
         kzgCommit, pkValidation, poseidonHash, proofValidation, prove, settingsValidation,
         srsValidation, u8_array_to_u128_le, verify, verifyAggr, vkValidation, witnessValidation,
     };
-    use ezkl::circuit::modules::polycommit::PolyCommitChip;
-    use ezkl::circuit::modules::poseidon::spec::{PoseidonSpec, POSEIDON_RATE, POSEIDON_WIDTH};
-    use ezkl::circuit::modules::poseidon::PoseidonChip;
     use ezkl::circuit::modules::Module;
+    use ezkl::circuit::modules::polycommit::PolyCommitChip;
+    use ezkl::circuit::modules::poseidon::PoseidonChip;
+    use ezkl::circuit::modules::poseidon::spec::{POSEIDON_RATE, POSEIDON_WIDTH, PoseidonSpec};
     use ezkl::graph::GraphCircuit;
     use ezkl::graph::{GraphSettings, GraphWitness};
     use ezkl::pfsys;

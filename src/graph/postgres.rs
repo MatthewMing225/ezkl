@@ -8,13 +8,13 @@ use std::sync::Arc;
 use std::time::Duration;
 use std::{fmt, pin::Pin};
 use tokio::task::JoinHandle;
+use tokio_postgres::NoTls;
 #[doc(inline)]
 pub use tokio_postgres::config::{
     ChannelBinding, Host, LoadBalanceHosts, SslMode, TargetSessionAttrs,
 };
 use tokio_postgres::tls::NoTlsStream;
-use tokio_postgres::NoTls;
-use tokio_postgres::{error::DbError, types::ToSql, Error, Row, Socket, ToStatement};
+use tokio_postgres::{Error, Row, Socket, ToStatement, error::DbError, types::ToSql};
 
 /// Connection configuration.
 ///

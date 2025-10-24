@@ -16,12 +16,12 @@ use std::{
     cell::RefCell,
     collections::{HashMap, HashSet},
     sync::{
-        atomic::{AtomicUsize, Ordering},
         Arc, Mutex,
+        atomic::{AtomicUsize, Ordering},
     },
 };
 
-use super::{lookup::LookupOp, CircuitError};
+use super::{CircuitError, lookup::LookupOp};
 
 /// Constants map
 pub type ConstantsMap<F> = HashMap<F, ValType<F>>;
@@ -355,8 +355,8 @@ impl<'a, F: PrimeField + TensorType + PartialOrd + std::hash::Hash> RegionCtx<'a
         &mut self,
         output: &mut Tensor<T>,
         inner_loop_function: impl Fn(usize, &mut RegionCtx<'a, F>) -> Result<T, CircuitError>
-            + Send
-            + Sync,
+        + Send
+        + Sync,
     ) -> Result<(), CircuitError> {
         if self.is_dummy() {
             self.dummy_loop(output, inner_loop_function)?;
@@ -391,8 +391,8 @@ impl<'a, F: PrimeField + TensorType + PartialOrd + std::hash::Hash> RegionCtx<'a
         &mut self,
         output: &mut Tensor<T>,
         inner_loop_function: impl Fn(usize, &mut RegionCtx<'a, F>) -> Result<T, CircuitError>
-            + Send
-            + Sync,
+        + Send
+        + Sync,
     ) -> Result<(), CircuitError> {
         let row = AtomicUsize::new(self.row());
         let linear_coord = AtomicUsize::new(self.linear_coord());

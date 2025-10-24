@@ -1,22 +1,22 @@
+use super::GraphSettings;
 use super::errors::GraphError;
 use super::extract_const_quantized_values;
 use super::node::*;
 use super::vars::*;
-use super::GraphSettings;
+use crate::circuit::Input;
+use crate::circuit::InputType;
+use crate::circuit::Unknown;
 use crate::circuit::hybrid::HybridOp;
 use crate::circuit::region::ConstantsMap;
 use crate::circuit::region::RegionCtx;
 use crate::circuit::region::RegionSettings;
 use crate::circuit::table::Range;
-use crate::circuit::Input;
-use crate::circuit::InputType;
-use crate::circuit::Unknown;
 use crate::fieldutils::IntegerRep;
 use crate::tensor::ValType;
 use crate::{
-    circuit::{lookup::LookupOp, BaseConfig as PolyConfig, CheckMode, Op},
-    tensor::{Tensor, ValTensor},
     RunArgs,
+    circuit::{BaseConfig as PolyConfig, CheckMode, Op, lookup::LookupOp},
+    tensor::{Tensor, ValTensor},
 };
 use halo2curves::bn256::Fr as Fp;
 

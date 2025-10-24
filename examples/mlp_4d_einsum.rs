@@ -1,8 +1,8 @@
 use ezkl::circuit::region::RegionCtx;
 use ezkl::circuit::{
-    ops::lookup::LookupOp, ops::poly::PolyOp, BaseConfig as PolyConfig, CheckMode,
+    BaseConfig as PolyConfig, CheckMode, ops::lookup::LookupOp, ops::poly::PolyOp,
 };
-use ezkl::fieldutils::{integer_rep_to_felt, IntegerRep};
+use ezkl::fieldutils::{IntegerRep, integer_rep_to_felt};
 use ezkl::tensor::*;
 use halo2_proofs::dev::MockProver;
 use halo2_proofs::{
@@ -283,10 +283,12 @@ pub fn runmlp() {
     let prover = MockProver::run(
         K as u32,
         &circuit,
-        vec![public_input
-            .iter()
-            .map(|x| integer_rep_to_felt::<F>(*x))
-            .collect()],
+        vec![
+            public_input
+                .iter()
+                .map(|x| integer_rep_to_felt::<F>(*x))
+                .collect(),
+        ],
     )
     .unwrap();
     prover.assert_satisfied();

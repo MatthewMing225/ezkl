@@ -1,0 +1,1114 @@
+diff --git a/Cargo.lock b/Cargo.lock
+index 0f99b32..23ae062 100644
+--- a/Cargo.lock
++++ b/Cargo.lock
+@@ -315,7 +315,7 @@ dependencies = [
+  "serde_json",
+  "tokio",
+  "tokio-stream",
+- "tower",
++ "tower 0.4.13",
+  "tracing",
+  "url",
+ ]
+@@ -474,7 +474,7 @@ dependencies = [
+  "serde_json",
+  "thiserror",
+  "tokio",
+- "tower",
++ "tower 0.4.13",
+  "url",
+  "wasm-bindgen-futures",
+ ]
+@@ -488,7 +488,7 @@ dependencies = [
+  "alloy-transport",
+  "reqwest",
+  "serde_json",
+- "tower",
++ "tower 0.4.13",
+  "tracing",
+  "url",
+ ]
+@@ -867,6 +867,61 @@ version = "1.1.0"
+ source = "registry+https://github.com/rust-lang/crates.io-index"
+ checksum = "d468802bab17cbc0cc575e9b053f41e72aa36bfa6b7f55e3529ffa43161b97fa"
+ 
++[[package]]
++name = "axum"
++version = "0.7.9"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "edca88bc138befd0323b20752846e6587272d3b03b0343c8ea28a6f819e6e71f"
++dependencies = [
++ "async-trait",
++ "axum-core",
++ "bytes",
++ "futures-util",
++ "http",
++ "http-body",
++ "http-body-util",
++ "hyper",
++ "hyper-util",
++ "itoa",
++ "matchit",
++ "memchr",
++ "mime",
++ "percent-encoding",
++ "pin-project-lite",
++ "rustversion",
++ "serde",
++ "serde_json",
++ "serde_path_to_error",
++ "serde_urlencoded",
++ "sync_wrapper",
++ "tokio",
++ "tower 0.5.2",
++ "tower-layer",
++ "tower-service",
++ "tracing",
++]
++
++[[package]]
++name = "axum-core"
++version = "0.4.5"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "09f2bd6146b97ae3359fa0cc6d6b376d9539582c7b4220f041a33ec24c226199"
++dependencies = [
++ "async-trait",
++ "bytes",
++ "futures-util",
++ "http",
++ "http-body",
++ "http-body-util",
++ "mime",
++ "pin-project-lite",
++ "rustversion",
++ "sync_wrapper",
++ "tower-layer",
++ "tower-service",
++ "tracing",
++]
++
+ [[package]]
+ name = "backtrace"
+ version = "0.3.70"
+@@ -944,7 +999,7 @@ dependencies = [
+  "bitflags 2.5.0",
+  "cexpr",
+  "clang-sys",
+- "itertools 0.11.0",
++ "itertools 0.12.1",
+  "lazy_static",
+  "lazycell",
+  "log",
+@@ -1933,9 +1988,11 @@ dependencies = [
+ 
+ [[package]]
+ name = "ezkl"
+-version = "0.0.0"
++version = "22.0.1"
+ dependencies = [
+  "alloy",
++ "anyhow",
++ "axum",
+  "bincode",
+  "camino",
+  "chrono",
+@@ -1966,6 +2023,7 @@ dependencies = [
+  "mnist",
+  "num",
+  "objc",
++ "once_cell",
+  "openssl",
+  "pg_bigdecimal",
+  "pyo3",
+@@ -2728,6 +2786,12 @@ version = "1.8.0"
+ source = "registry+https://github.com/rust-lang/crates.io-index"
+ checksum = "d897f394bad6a705d5f4104762e116a75639e470d80901eed05a860a95cb1904"
+ 
++[[package]]
++name = "httpdate"
++version = "1.0.3"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "df3b46402a9d5adb4c86a0cf463f42e19994e3ee891101b1841f30a545cb49a9"
++
+ [[package]]
+ name = "humantime"
+ version = "2.1.0"
+@@ -2746,6 +2810,7 @@ dependencies = [
+  "http",
+  "http-body",
+  "httparse",
++ "httpdate",
+  "itoa",
+  "pin-project-lite",
+  "smallvec",
+@@ -2803,7 +2868,7 @@ dependencies = [
+  "pin-project-lite",
+  "socket2",
+  "tokio",
+- "tower",
++ "tower 0.4.13",
+  "tower-service",
+  "tracing",
+ ]
+@@ -3139,7 +3204,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
+ checksum = "fc2f4eb4bc735547cfed7c0a4922cbd04a4655978c09b54f1f7b228750664c34"
+ dependencies = [
+  "cfg-if",
+- "windows-targets 0.48.5",
++ "windows-targets 0.52.6",
+ ]
+ 
+ [[package]]
+@@ -3291,6 +3356,12 @@ version = "1.0.2"
+ source = "registry+https://github.com/rust-lang/crates.io-index"
+ checksum = "3e2e65a1a2e43cfcb47a895c4c8b10d1f4a61097f9f254f183aee60cad9c651d"
+ 
++[[package]]
++name = "matchit"
++version = "0.7.3"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "0e7465ac9959cc2b1404e8e2367b43684a6d13790fe23056cc8c6c5a6b7bcb94"
++
+ [[package]]
+ name = "matrixmultiply"
+ version = "0.3.8"
+@@ -5033,10 +5104,11 @@ checksum = "a3f0bf26fd526d2a95683cd0f87bf103b8539e2ca1ef48ce002d67aad59aa0b4"
+ 
+ [[package]]
+ name = "serde"
+-version = "1.0.215"
++version = "1.0.228"
+ source = "registry+https://github.com/rust-lang/crates.io-index"
+-checksum = "6513c1ad0b11a9376da888e3e0baa0077f1aed55c17f50e7b2397136129fb88f"
++checksum = "9a8e94ea7f378bd32cbbd37198a4a91436180c5bb472411e48b5ec2e2124ae9e"
+ dependencies = [
++ "serde_core",
+  "serde_derive",
+ ]
+ 
+@@ -5070,11 +5142,20 @@ dependencies = [
+  "serde",
+ ]
+ 
++[[package]]
++name = "serde_core"
++version = "1.0.228"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "41d385c7d4ca58e59fc732af25c3983b67ac852c1a25000afe1175de458b67ad"
++dependencies = [
++ "serde_derive",
++]
++
+ [[package]]
+ name = "serde_derive"
+-version = "1.0.215"
++version = "1.0.228"
+ source = "registry+https://github.com/rust-lang/crates.io-index"
+-checksum = "ad1e866f866923f252f05c889987993144fb74e722403468a4ebd70c3cd756c0"
++checksum = "d540f220d3187173da220f885ab66608367b6574e925011a9353e4badda91d79"
+ dependencies = [
+  "proc-macro2",
+  "quote",
+@@ -5092,6 +5173,17 @@ dependencies = [
+  "serde",
+ ]
+ 
++[[package]]
++name = "serde_path_to_error"
++version = "0.1.20"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "10a9ff822e371bb5403e391ecd83e182e0e77ba7f6fe0160b795797109d1b457"
++dependencies = [
++ "itoa",
++ "serde",
++ "serde_core",
++]
++
+ [[package]]
+ name = "serde_spanned"
+ version = "0.6.8"
+@@ -5861,6 +5953,22 @@ dependencies = [
+  "tracing",
+ ]
+ 
++[[package]]
++name = "tower"
++version = "0.5.2"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "d039ad9159c98b70ecfd540b2573b97f7f52c3e8d9f8ad57a24b916a536975f9"
++dependencies = [
++ "futures-core",
++ "futures-util",
++ "pin-project-lite",
++ "sync_wrapper",
++ "tokio",
++ "tower-layer",
++ "tower-service",
++ "tracing",
++]
++
+ [[package]]
+ name = "tower-layer"
+ version = "0.3.3"
+diff --git a/Cargo.toml b/Cargo.toml
+index 74ebfdb..f34c5b1 100644
+--- a/Cargo.toml
++++ b/Cargo.toml
+@@ -2,7 +2,7 @@ cargo-features = ["profile-rustflags"]
+ 
+ [package]
+ name = "ezkl"
+-version = "0.0.0"
++version = "22.0.1"
+ edition = "2024"
+ default-run = "ezkl"
+ 
+@@ -42,9 +42,12 @@ unzip-n = "0.1.2"
+ num = "0.4.1"
+ tosubcommand = { git = "https://github.com/zkonduit/enum_to_subcommand", package = "tosubcommand", optional = true }
+ semver = { version = "1.0.22", optional = true }
++once_cell = "1.19.0"
++anyhow = "1.0.94"
+ 
+ [target.'cfg(not(target_arch = "wasm32"))'.dependencies]
+ serde_json = { version = "1.0.97", features = ["float_roundtrip", "raw_value"] }
++axum = { version = "0.7.5", features = ["json"], optional = true }
+ 
+ # evm related deps
+ alloy = { git = "https://github.com/alloy-rs/alloy", version = "0.1.0", rev = "5fbf57bac99edef9d8475190109a7ea9fb7e5e83", features = [
+@@ -76,6 +79,8 @@ colored_json = { version = "3.0.1", default-features = false, optional = true }
+ tokio = { version = "1.35.0", default-features = false, features = [
+     "macros",
+     "rt-multi-thread",
++    "sync",
++    "net",
+ ], optional = true }
+ pyo3 = { version = "0.23.2", features = [
+     "extension-module",
+@@ -216,6 +221,10 @@ required-features = ["ios-bindings", "uuid", "camino", "uniffi_bindgen"]
+ name = "py_stub_gen"
+ required-features = ["python-bindings"]
+ 
++[[bin]]
++name = "ezkl_daemon"
++required-features = ["ezkl"]
++
+ [features]
+ web = ["wasm-bindgen-rayon"]
+ default = [
+@@ -242,6 +251,7 @@ ezkl = [
+     "dep:indicatif",
+     "dep:gag",
+     "dep:reqwest",
++    "dep:axum",
+     "dep:tokio-postgres",
+     "dep:pg_bigdecimal",
+     "dep:lazy_static",
+diff --git a/benches/accum_conv.rs b/benches/accum_conv.rs
+index 89c50b1..a36a2e4 100644
+--- a/benches/accum_conv.rs
++++ b/benches/accum_conv.rs
+@@ -1,10 +1,10 @@
+-use criterion::{criterion_group, criterion_main, BenchmarkId, Criterion, Throughput};
++use criterion::{BenchmarkId, Criterion, Throughput, criterion_group, criterion_main};
+ use ezkl::circuit::poly::PolyOp;
+ use ezkl::circuit::*;
++use ezkl::pfsys::TranscriptType;
+ use ezkl::pfsys::create_keys;
+ use ezkl::pfsys::create_proof_circuit;
+ use ezkl::pfsys::srs::gen_srs;
+-use ezkl::pfsys::TranscriptType;
+ use ezkl::tensor::*;
+ use halo2_proofs::poly::kzg::commitment::KZGCommitmentScheme;
+ use halo2_proofs::poly::kzg::multiopen::ProverSHPLONK;
+diff --git a/benches/accum_dot.rs b/benches/accum_dot.rs
+index b037afb..3aff50c 100644
+--- a/benches/accum_dot.rs
++++ b/benches/accum_dot.rs
+@@ -1,8 +1,8 @@
+-use criterion::{criterion_group, criterion_main, BenchmarkId, Criterion, Throughput};
++use criterion::{BenchmarkId, Criterion, Throughput, criterion_group, criterion_main};
+ use ezkl::circuit::poly::PolyOp;
+ use ezkl::circuit::*;
+-use ezkl::pfsys::create_proof_circuit;
+ use ezkl::pfsys::TranscriptType;
++use ezkl::pfsys::create_proof_circuit;
+ use ezkl::pfsys::{create_keys, srs::gen_srs};
+ use ezkl::tensor::*;
+ use halo2_proofs::poly::kzg::commitment::KZGCommitmentScheme;
+diff --git a/benches/accum_einsum_matmul.rs b/benches/accum_einsum_matmul.rs
+index 5ba9ad6..8f6dba2 100644
+--- a/benches/accum_einsum_matmul.rs
++++ b/benches/accum_einsum_matmul.rs
+@@ -1,8 +1,8 @@
+-use criterion::{criterion_group, criterion_main, BenchmarkId, Criterion, Throughput};
++use criterion::{BenchmarkId, Criterion, Throughput, criterion_group, criterion_main};
+ use ezkl::circuit::poly::PolyOp;
+ use ezkl::circuit::*;
+-use ezkl::pfsys::create_proof_circuit;
+ use ezkl::pfsys::TranscriptType;
++use ezkl::pfsys::create_proof_circuit;
+ use ezkl::pfsys::{create_keys, srs::gen_srs};
+ use ezkl::tensor::*;
+ use halo2_proofs::poly::kzg::commitment::KZGCommitmentScheme;
+diff --git a/benches/accum_matmul_sigmoid.rs b/benches/accum_matmul_sigmoid.rs
+index dba9e93..38c4663 100644
+--- a/benches/accum_matmul_sigmoid.rs
++++ b/benches/accum_matmul_sigmoid.rs
+@@ -1,11 +1,11 @@
+-use criterion::{criterion_group, criterion_main, BenchmarkId, Criterion, Throughput};
++use criterion::{BenchmarkId, Criterion, Throughput, criterion_group, criterion_main};
+ use ezkl::circuit::table::Range;
+ use ezkl::circuit::*;
+ 
+ use ezkl::circuit::lookup::LookupOp;
+ use ezkl::circuit::poly::PolyOp;
+-use ezkl::pfsys::create_proof_circuit;
+ use ezkl::pfsys::TranscriptType;
++use ezkl::pfsys::create_proof_circuit;
+ use ezkl::pfsys::{create_keys, srs::gen_srs};
+ use ezkl::tensor::*;
+ use halo2_proofs::poly::kzg::commitment::KZGCommitmentScheme;
+diff --git a/benches/accum_matmul_sigmoid_overflow.rs b/benches/accum_matmul_sigmoid_overflow.rs
+index a8ffe4c..92b3aef 100644
+--- a/benches/accum_matmul_sigmoid_overflow.rs
++++ b/benches/accum_matmul_sigmoid_overflow.rs
+@@ -1,11 +1,11 @@
+-use criterion::{criterion_group, criterion_main, BenchmarkId, Criterion, Throughput};
++use criterion::{BenchmarkId, Criterion, Throughput, criterion_group, criterion_main};
+ use ezkl::circuit::*;
+ 
+ use ezkl::circuit::lookup::LookupOp;
+ use ezkl::circuit::poly::PolyOp;
+ use ezkl::circuit::table::Range;
+-use ezkl::pfsys::create_proof_circuit;
+ use ezkl::pfsys::TranscriptType;
++use ezkl::pfsys::create_proof_circuit;
+ use ezkl::pfsys::{create_keys, srs::gen_srs};
+ use ezkl::tensor::*;
+ use halo2_proofs::poly::kzg::commitment::KZGCommitmentScheme;
+diff --git a/benches/accum_sum.rs b/benches/accum_sum.rs
+index 798dddb..fa2948a 100644
+--- a/benches/accum_sum.rs
++++ b/benches/accum_sum.rs
+@@ -1,8 +1,8 @@
+-use criterion::{criterion_group, criterion_main, BenchmarkId, Criterion, Throughput};
++use criterion::{BenchmarkId, Criterion, Throughput, criterion_group, criterion_main};
+ use ezkl::circuit::poly::PolyOp;
+ use ezkl::circuit::*;
+-use ezkl::pfsys::create_proof_circuit;
+ use ezkl::pfsys::TranscriptType;
++use ezkl::pfsys::create_proof_circuit;
+ use ezkl::pfsys::{create_keys, srs::gen_srs};
+ use ezkl::tensor::*;
+ use halo2_proofs::poly::kzg::commitment::KZGCommitmentScheme;
+diff --git a/benches/accum_sumpool.rs b/benches/accum_sumpool.rs
+index 31f8fee..3818bb4 100644
+--- a/benches/accum_sumpool.rs
++++ b/benches/accum_sumpool.rs
+@@ -1,10 +1,10 @@
+-use criterion::{criterion_group, criterion_main, BenchmarkId, Criterion, Throughput};
++use criterion::{BenchmarkId, Criterion, Throughput, criterion_group, criterion_main};
+ use ezkl::circuit::hybrid::HybridOp;
+ use ezkl::circuit::*;
++use ezkl::pfsys::TranscriptType;
+ use ezkl::pfsys::create_keys;
+ use ezkl::pfsys::create_proof_circuit;
+ use ezkl::pfsys::srs::gen_srs;
+-use ezkl::pfsys::TranscriptType;
+ use ezkl::tensor::*;
+ use halo2_proofs::poly::kzg::commitment::KZGCommitmentScheme;
+ use halo2_proofs::poly::kzg::multiopen::ProverSHPLONK;
+diff --git a/benches/pairwise_add.rs b/benches/pairwise_add.rs
+index d5849e7..e080fa1 100644
+--- a/benches/pairwise_add.rs
++++ b/benches/pairwise_add.rs
+@@ -1,8 +1,8 @@
+-use criterion::{criterion_group, criterion_main, BenchmarkId, Criterion, Throughput};
++use criterion::{BenchmarkId, Criterion, Throughput, criterion_group, criterion_main};
+ use ezkl::circuit::poly::PolyOp;
+ use ezkl::circuit::*;
+-use ezkl::pfsys::create_proof_circuit;
+ use ezkl::pfsys::TranscriptType;
++use ezkl::pfsys::create_proof_circuit;
+ use ezkl::pfsys::{create_keys, srs::gen_srs};
+ use ezkl::tensor::*;
+ use halo2_proofs::poly::kzg::commitment::KZGCommitmentScheme;
+diff --git a/benches/pairwise_pow.rs b/benches/pairwise_pow.rs
+index edfd6eb..a8ef887 100644
+--- a/benches/pairwise_pow.rs
++++ b/benches/pairwise_pow.rs
+@@ -1,9 +1,9 @@
+-use criterion::{criterion_group, criterion_main, BenchmarkId, Criterion, Throughput};
++use criterion::{BenchmarkId, Criterion, Throughput, criterion_group, criterion_main};
+ use ezkl::circuit::poly::PolyOp;
+ use ezkl::circuit::region::RegionCtx;
+ use ezkl::circuit::*;
+-use ezkl::pfsys::create_proof_circuit;
+ use ezkl::pfsys::TranscriptType;
++use ezkl::pfsys::create_proof_circuit;
+ use ezkl::pfsys::{create_keys, srs::gen_srs};
+ use ezkl::tensor::*;
+ use halo2_proofs::poly::kzg::commitment::KZGCommitmentScheme;
+diff --git a/benches/poseidon.rs b/benches/poseidon.rs
+index 14a8d6d..eaf48dc 100644
+--- a/benches/poseidon.rs
++++ b/benches/poseidon.rs
+@@ -1,14 +1,14 @@
+ use std::collections::HashMap;
+ 
+-use criterion::{criterion_group, criterion_main, BenchmarkId, Criterion, Throughput};
+-use ezkl::circuit::modules::poseidon::spec::{PoseidonSpec, POSEIDON_RATE, POSEIDON_WIDTH};
+-use ezkl::circuit::modules::poseidon::{PoseidonChip, PoseidonConfig};
++use criterion::{BenchmarkId, Criterion, Throughput, criterion_group, criterion_main};
+ use ezkl::circuit::modules::Module;
++use ezkl::circuit::modules::poseidon::spec::{POSEIDON_RATE, POSEIDON_WIDTH, PoseidonSpec};
++use ezkl::circuit::modules::poseidon::{PoseidonChip, PoseidonConfig};
+ use ezkl::circuit::*;
++use ezkl::pfsys::TranscriptType;
+ use ezkl::pfsys::create_keys;
+ use ezkl::pfsys::create_proof_circuit;
+ use ezkl::pfsys::srs::gen_srs;
+-use ezkl::pfsys::TranscriptType;
+ use ezkl::tensor::*;
+ use halo2_proofs::circuit::Value;
+ use halo2_proofs::poly::kzg::commitment::KZGCommitmentScheme;
+diff --git a/benches/relu_lookupless.rs b/benches/relu_lookupless.rs
+index 693ed9b..1f6b109 100644
+--- a/benches/relu_lookupless.rs
++++ b/benches/relu_lookupless.rs
+@@ -1,10 +1,10 @@
+-use criterion::{criterion_group, criterion_main, BenchmarkId, Criterion, Throughput};
++use criterion::{BenchmarkId, Criterion, Throughput, criterion_group, criterion_main};
+ use ezkl::circuit::poly::PolyOp;
+ use ezkl::circuit::region::RegionCtx;
+ use ezkl::circuit::{BaseConfig as Config, CheckMode};
+ use ezkl::fieldutils::IntegerRep;
+-use ezkl::pfsys::create_proof_circuit;
+ use ezkl::pfsys::TranscriptType;
++use ezkl::pfsys::create_proof_circuit;
+ use ezkl::pfsys::{create_keys, srs::gen_srs};
+ use ezkl::tensor::*;
+ use halo2_proofs::poly::kzg::commitment::KZGCommitmentScheme;
+diff --git a/benches/sigmoid.rs b/benches/sigmoid.rs
+index bd13a06..dd6a45f 100644
+--- a/benches/sigmoid.rs
++++ b/benches/sigmoid.rs
+@@ -1,10 +1,10 @@
+-use criterion::{criterion_group, criterion_main, BenchmarkId, Criterion, Throughput};
++use criterion::{BenchmarkId, Criterion, Throughput, criterion_group, criterion_main};
+ use ezkl::circuit::region::RegionCtx;
+ use ezkl::circuit::table::Range;
+-use ezkl::circuit::{ops::lookup::LookupOp, BaseConfig as Config, CheckMode};
++use ezkl::circuit::{BaseConfig as Config, CheckMode, ops::lookup::LookupOp};
+ use ezkl::fieldutils::IntegerRep;
+-use ezkl::pfsys::create_proof_circuit;
+ use ezkl::pfsys::TranscriptType;
++use ezkl::pfsys::create_proof_circuit;
+ use ezkl::pfsys::{create_keys, srs::gen_srs};
+ use ezkl::tensor::*;
+ use halo2_proofs::poly::kzg::commitment::KZGCommitmentScheme;
+diff --git a/benches/zero_finder.rs b/benches/zero_finder.rs
+index 73123bf..e02f576 100644
+--- a/benches/zero_finder.rs
++++ b/benches/zero_finder.rs
+@@ -1,6 +1,6 @@
+ use std::thread;
+ 
+-use criterion::{black_box, criterion_group, criterion_main, Criterion};
++use criterion::{Criterion, black_box, criterion_group, criterion_main};
+ use halo2curves::{bn256::Fr as F, ff::Field};
+ use maybe_rayon::{
+     iter::{IndexedParallelIterator, IntoParallelRefIterator, ParallelIterator},
+diff --git a/build.rs b/build.rs
+index 31bdb68..1f7f351 100644
+--- a/build.rs
++++ b/build.rs
+@@ -1,6 +1,8 @@
+ fn main() {
+     if cfg!(feature = "ios-bindings-test") {
+-        println!("cargo::rustc-env=UNIFFI_CARGO_BUILD_EXTRA_ARGS=--features=ios-bindings --no-default-features");
++        println!(
++            "cargo::rustc-env=UNIFFI_CARGO_BUILD_EXTRA_ARGS=--features=ios-bindings --no-default-features"
++        );
+     }
+ 
+     println!("cargo::rerun-if-changed=build.rs");
+diff --git a/examples/conv2d_mnist/main.rs b/examples/conv2d_mnist/main.rs
+index 56a030d..a2bc386 100644
+--- a/examples/conv2d_mnist/main.rs
++++ b/examples/conv2d_mnist/main.rs
+@@ -1,8 +1,8 @@
+ use ezkl::circuit::region::RegionCtx;
+ use ezkl::circuit::{
+-    ops::lookup::LookupOp, ops::poly::PolyOp, BaseConfig as PolyConfig, CheckMode,
++    BaseConfig as PolyConfig, CheckMode, ops::lookup::LookupOp, ops::poly::PolyOp,
+ };
+-use ezkl::fieldutils::{self, integer_rep_to_felt, IntegerRep};
++use ezkl::fieldutils::{self, IntegerRep, integer_rep_to_felt};
+ use ezkl::tensor::*;
+ use halo2_proofs::dev::MockProver;
+ use halo2_proofs::poly::commitment::Params;
+@@ -10,8 +10,8 @@ use halo2_proofs::poly::kzg::multiopen::{ProverSHPLONK, VerifierSHPLONK};
+ use halo2_proofs::{
+     circuit::{Layouter, SimpleFloorPlanner, Value},
+     plonk::{
+-        create_proof, keygen_pk, keygen_vk, verify_proof, Circuit, Column, ConstraintSystem, Error,
+-        Instance,
++        Circuit, Column, ConstraintSystem, Error, Instance, create_proof, keygen_pk, keygen_vk,
++        verify_proof,
+     },
+     poly::{
+         commitment::ParamsProver,
+@@ -32,7 +32,6 @@ use mnist::*;
+ use rand::rngs::OsRng;
+ use std::marker::PhantomData;
+ 
+-
+ mod params;
+ 
+ const K: usize = 20;
+@@ -88,20 +87,20 @@ struct MyCircuit<
+ }
+ 
+ impl<
+-        const LEN: usize,
+-        const CLASSES: usize,
+-        const LOOKUP_MIN: IntegerRep,
+-        const LOOKUP_MAX: IntegerRep,
+-        // Convolution
+-        const KERNEL_HEIGHT: usize,
+-        const KERNEL_WIDTH: usize,
+-        const OUT_CHANNELS: usize,
+-        const STRIDE: usize,
+-        const IMAGE_HEIGHT: usize,
+-        const IMAGE_WIDTH: usize,
+-        const IN_CHANNELS: usize,
+-        const PADDING: usize,
+-    > Circuit<F>
++    const LEN: usize,
++    const CLASSES: usize,
++    const LOOKUP_MIN: IntegerRep,
++    const LOOKUP_MAX: IntegerRep,
++    // Convolution
++    const KERNEL_HEIGHT: usize,
++    const KERNEL_WIDTH: usize,
++    const OUT_CHANNELS: usize,
++    const STRIDE: usize,
++    const IMAGE_HEIGHT: usize,
++    const IMAGE_WIDTH: usize,
++    const IN_CHANNELS: usize,
++    const PADDING: usize,
++> Circuit<F>
+     for MyCircuit<
+         LEN,
+         CLASSES,
+diff --git a/examples/mlp_4d_einsum.rs b/examples/mlp_4d_einsum.rs
+index 88b699f..1129983 100644
+--- a/examples/mlp_4d_einsum.rs
++++ b/examples/mlp_4d_einsum.rs
+@@ -1,8 +1,8 @@
+ use ezkl::circuit::region::RegionCtx;
+ use ezkl::circuit::{
+-    ops::lookup::LookupOp, ops::poly::PolyOp, BaseConfig as PolyConfig, CheckMode,
++    BaseConfig as PolyConfig, CheckMode, ops::lookup::LookupOp, ops::poly::PolyOp,
+ };
+-use ezkl::fieldutils::{integer_rep_to_felt, IntegerRep};
++use ezkl::fieldutils::{IntegerRep, integer_rep_to_felt};
+ use ezkl::tensor::*;
+ use halo2_proofs::dev::MockProver;
+ use halo2_proofs::{
+@@ -283,10 +283,12 @@ pub fn runmlp() {
+     let prover = MockProver::run(
+         K as u32,
+         &circuit,
+-        vec![public_input
+-            .iter()
+-            .map(|x| integer_rep_to_felt::<F>(*x))
+-            .collect()],
++        vec![
++            public_input
++                .iter()
++                .map(|x| integer_rep_to_felt::<F>(*x))
++                .collect(),
++        ],
+     )
+     .unwrap();
+     prover.assert_satisfied();
+diff --git a/src/bindings/universal.rs b/src/bindings/universal.rs
+index b729923..8313d20 100644
+--- a/src/bindings/universal.rs
++++ b/src/bindings/universal.rs
+@@ -1,6 +1,7 @@
+ use halo2_proofs::{
+     plonk::*,
+     poly::{
++        VerificationStrategy,
+         commitment::{CommitmentScheme, ParamsProver},
+         ipa::{
+             commitment::{IPACommitmentScheme, ParamsIPA},
+@@ -12,7 +13,6 @@ use halo2_proofs::{
+             multiopen::{ProverSHPLONK, VerifierSHPLONK},
+             strategy::SingleStrategy as KZGSingleStrategy,
+         },
+-        VerificationStrategy,
+     },
+ };
+ use std::fmt::Display;
+@@ -20,15 +20,15 @@ use std::io::BufReader;
+ use std::str::FromStr;
+ 
+ use crate::{
++    CheckMode, Commitments, EZKLError as InnerEZKLError,
+     circuit::region::RegionSettings,
+     graph::GraphSettings,
+     pfsys::{
+-        create_proof_circuit,
++        TranscriptType, create_proof_circuit,
+         evm::aggregation_kzg::{AggregationCircuit, PoseidonTranscript},
+-        verify_proof_circuit, TranscriptType,
++        verify_proof_circuit,
+     },
+     tensor::TensorType,
+-    CheckMode, Commitments, EZKLError as InnerEZKLError,
+ };
+ 
+ use crate::graph::{GraphCircuit, GraphWitness};
+diff --git a/src/bindings/wasm.rs b/src/bindings/wasm.rs
+index dcb079a..762f5e7 100644
+--- a/src/bindings/wasm.rs
++++ b/src/bindings/wasm.rs
+@@ -1,14 +1,14 @@
+ use crate::{
+     circuit::modules::{
++        Module,
+         polycommit::PolyCommitChip,
+         poseidon::{
+-            spec::{PoseidonSpec, POSEIDON_RATE, POSEIDON_WIDTH},
+             PoseidonChip,
++            spec::{POSEIDON_RATE, POSEIDON_WIDTH, PoseidonSpec},
+         },
+-        Module,
+     },
+     fieldutils::{felt_to_integer_rep, integer_rep_to_felt},
+-    graph::{quantize_float, scale_to_multiplier, GraphCircuit, GraphSettings},
++    graph::{GraphCircuit, GraphSettings, quantize_float, scale_to_multiplier},
+ };
+ use console_error_panic_hook;
+ use halo2_proofs::{
+@@ -24,9 +24,9 @@ use wasm_bindgen::prelude::*;
+ use wasm_bindgen_console_logger::DEFAULT_LOGGER;
+ 
+ use crate::bindings::universal::{
+-    compiled_circuit_validation, encode_verifier_calldata, gen_pk, gen_vk, gen_witness,
+-    input_validation, pk_validation, proof_validation, settings_validation, srs_validation,
+-    verify_aggr, vk_validation, witness_validation, EZKLError as ExternalEZKLError,
++    EZKLError as ExternalEZKLError, compiled_circuit_validation, encode_verifier_calldata, gen_pk,
++    gen_vk, gen_witness, input_validation, pk_validation, proof_validation, settings_validation,
++    srs_validation, verify_aggr, vk_validation, witness_validation,
+ };
+ #[cfg(feature = "web")]
+ pub use wasm_bindgen_rayon::init_thread_pool;
+diff --git a/src/circuit/modules/planner.rs b/src/circuit/modules/planner.rs
+index ad52027..34d9b3b 100644
+--- a/src/circuit/modules/planner.rs
++++ b/src/circuit/modules/planner.rs
+@@ -7,8 +7,8 @@ use halo2curves::ff::Field;
+ 
+ use halo2_proofs::{
+     circuit::{
+-        layouter::{RegionColumn, RegionLayouter, RegionShape, SyncDeps, TableLayouter},
+         Cell, Layouter, Region, RegionIndex, RegionStart, Table, Value,
++        layouter::{RegionColumn, RegionLayouter, RegionShape, SyncDeps, TableLayouter},
+     },
+     plonk::{
+         Advice, Any, Assigned, Assignment, Challenge, Circuit, Column, Error, Fixed, FloorPlanner,
+diff --git a/src/circuit/modules/polycommit.rs b/src/circuit/modules/polycommit.rs
+index dbd2444..83c78c1 100644
+--- a/src/circuit/modules/polycommit.rs
++++ b/src/circuit/modules/polycommit.rs
+@@ -10,16 +10,16 @@ use std::collections::HashMap;
+ use halo2_proofs::halo2curves::bn256::Fr as Fp;
+ use halo2_proofs::poly::commitment::{Blind, CommitmentScheme, Params};
+ use halo2_proofs::{circuit::*, plonk::*};
++use halo2curves::CurveAffine;
+ use halo2curves::bn256::G1Affine;
+-use halo2curves::group::prime::PrimeCurveAffine;
+ use halo2curves::group::Curve;
+-use halo2curves::CurveAffine;
++use halo2curves::group::prime::PrimeCurveAffine;
+ 
+ use crate::circuit::region::ConstantsMap;
+ use crate::tensor::{Tensor, ValTensor, ValType, VarTensor};
+ 
+-use super::errors::ModuleError;
+ use super::Module;
++use super::errors::ModuleError;
+ 
+ /// The number of instance columns used by the PolyCommit hash function
+ pub const NUM_INSTANCE_COLUMNS: usize = 0;
+diff --git a/src/circuit/modules/poseidon.rs b/src/circuit/modules/poseidon.rs
+index 9dd2e14..f08039b 100644
+--- a/src/circuit/modules/poseidon.rs
++++ b/src/circuit/modules/poseidon.rs
+@@ -9,7 +9,7 @@ pub mod spec;
+ 
+ // This chip adds a set of advice columns to the gadget Chip to store the inputs of the hash
+ use halo2_gadgets::poseidon::{
+-    primitives::VariableLength, primitives::*, Hash, Pow5Chip, Pow5Config,
++    Hash, Pow5Chip, Pow5Config, primitives::VariableLength, primitives::*,
+ };
+ use halo2_proofs::halo2curves::bn256::Fr as Fp;
+ use halo2_proofs::{circuit::*, plonk::*};
+@@ -19,8 +19,8 @@ use std::marker::PhantomData;
+ use crate::circuit::region::ConstantsMap;
+ use crate::tensor::{Tensor, ValTensor, ValType};
+ 
+-use super::errors::ModuleError;
+ use super::Module;
++use super::errors::ModuleError;
+ 
+ /// The number of instance columns used by the Poseidon hash function
+ pub const NUM_INSTANCE_COLUMNS: usize = 1;
+@@ -404,7 +404,7 @@ mod tests {
+     use crate::circuit::modules::ModulePlanner;
+ 
+     use super::{
+-        spec::{PoseidonSpec, POSEIDON_RATE, POSEIDON_WIDTH},
++        spec::{POSEIDON_RATE, POSEIDON_WIDTH, PoseidonSpec},
+         *,
+     };
+ 
+diff --git a/src/circuit/modules/poseidon/poseidon_params.rs b/src/circuit/modules/poseidon/poseidon_params.rs
+index 7eb1f4e..1e0ffd8 100644
+--- a/src/circuit/modules/poseidon/poseidon_params.rs
++++ b/src/circuit/modules/poseidon/poseidon_params.rs
+@@ -912,16 +912,16 @@ pub(crate) const ROUND_CONSTANTS: [[Fp; 2]; 64] = [
+         ]),
+     ],
+ ]; // n: 254
+-   // t: 5
+-   // N: 1270
+-   // Result Algorithm 1:
+-   // [True, 0]
+-   // Result Algorithm 2:
+-   // [True, None]
+-   // Result Algorithm 3:
+-   // [True, None]
+-   // Prime number: 0x0x30644e72e131a029b85045b68181585d2833e84879b9709143e1f593f0000001
+-   // MDS matrix:
++// t: 5
++// N: 1270
++// Result Algorithm 1:
++// [True, 0]
++// Result Algorithm 2:
++// [True, None]
++// Result Algorithm 3:
++// [True, None]
++// Prime number: 0x0x30644e72e131a029b85045b68181585d2833e84879b9709143e1f593f0000001
++// MDS matrix:
+ pub(crate) const MDS: [[Fp; 2]; 2] = [
+     [
+         Fp::from_raw([
+diff --git a/src/circuit/ops/chip.rs b/src/circuit/ops/chip.rs
+index 7fc73d5..9966c41 100644
+--- a/src/circuit/ops/chip.rs
++++ b/src/circuit/ops/chip.rs
+@@ -25,7 +25,7 @@ use crate::{
+ };
+ use std::{collections::BTreeMap, marker::PhantomData};
+ 
+-use super::{lookup::LookupOp, region::RegionCtx, CircuitError, Op};
++use super::{CircuitError, Op, lookup::LookupOp, region::RegionCtx};
+ use halo2curves::ff::{Field, PrimeField};
+ 
+ #[allow(missing_docs)]
+diff --git a/src/circuit/ops/lookup.rs b/src/circuit/ops/lookup.rs
+index 2b2fa6f..c3cbfcf 100644
+--- a/src/circuit/ops/lookup.rs
++++ b/src/circuit/ops/lookup.rs
+@@ -3,7 +3,7 @@ use serde::{Deserialize, Serialize};
+ 
+ use crate::{
+     circuit::{layouts, table::Range, utils},
+-    fieldutils::{felt_to_integer_rep, integer_rep_to_felt, IntegerRep},
++    fieldutils::{IntegerRep, felt_to_integer_rep, integer_rep_to_felt},
+     tensor::{self, Tensor, TensorError, TensorType},
+ };
+ 
+diff --git a/src/circuit/ops/region.rs b/src/circuit/ops/region.rs
+index c3a3dc7..5af22db 100644
+--- a/src/circuit/ops/region.rs
++++ b/src/circuit/ops/region.rs
+@@ -16,12 +16,12 @@ use std::{
+     cell::RefCell,
+     collections::{HashMap, HashSet},
+     sync::{
+-        atomic::{AtomicUsize, Ordering},
+         Arc, Mutex,
++        atomic::{AtomicUsize, Ordering},
+     },
+ };
+ 
+-use super::{lookup::LookupOp, CircuitError};
++use super::{CircuitError, lookup::LookupOp};
+ 
+ /// Constants map
+ pub type ConstantsMap<F> = HashMap<F, ValType<F>>;
+@@ -355,8 +355,8 @@ impl<'a, F: PrimeField + TensorType + PartialOrd + std::hash::Hash> RegionCtx<'a
+         &mut self,
+         output: &mut Tensor<T>,
+         inner_loop_function: impl Fn(usize, &mut RegionCtx<'a, F>) -> Result<T, CircuitError>
+-            + Send
+-            + Sync,
++        + Send
++        + Sync,
+     ) -> Result<(), CircuitError> {
+         if self.is_dummy() {
+             self.dummy_loop(output, inner_loop_function)?;
+@@ -391,8 +391,8 @@ impl<'a, F: PrimeField + TensorType + PartialOrd + std::hash::Hash> RegionCtx<'a
+         &mut self,
+         output: &mut Tensor<T>,
+         inner_loop_function: impl Fn(usize, &mut RegionCtx<'a, F>) -> Result<T, CircuitError>
+-            + Send
+-            + Sync,
++        + Send
++        + Sync,
+     ) -> Result<(), CircuitError> {
+         let row = AtomicUsize::new(self.row());
+         let linear_coord = AtomicUsize::new(self.linear_coord());
+diff --git a/src/circuit/table.rs b/src/circuit/table.rs
+index 3f5ef67..3edc8d0 100644
+--- a/src/circuit/table.rs
++++ b/src/circuit/table.rs
+@@ -11,7 +11,7 @@ use maybe_rayon::prelude::{IntoParallelIterator, ParallelIterator};
+ 
+ use crate::{
+     circuit::CircuitError,
+-    fieldutils::{integer_rep_to_felt, IntegerRep},
++    fieldutils::{IntegerRep, integer_rep_to_felt},
+     tensor::{Tensor, TensorType},
+ };
+ 
+diff --git a/src/circuit/tests.rs b/src/circuit/tests.rs
+index 9c6b9ac..c8d7e35 100644
+--- a/src/circuit/tests.rs
++++ b/src/circuit/tests.rs
+@@ -1964,11 +1964,11 @@ mod add_with_overflow_and_poseidon {
+     use halo2curves::bn256::Fr;
+ 
+     use crate::circuit::modules::{
++        Module, ModulePlanner,
+         poseidon::{
+-            spec::{PoseidonSpec, POSEIDON_RATE, POSEIDON_WIDTH},
+             PoseidonChip, PoseidonConfig,
++            spec::{POSEIDON_RATE, POSEIDON_WIDTH, PoseidonSpec},
+         },
+-        Module, ModulePlanner,
+     };
+ 
+     use super::*;
+diff --git a/src/graph/errors.rs b/src/graph/errors.rs
+index cc2f8b6..ddfe637 100644
+--- a/src/graph/errors.rs
++++ b/src/graph/errors.rs
+@@ -141,7 +141,9 @@ pub enum GraphError {
+     #[error("range check {0} is too large")]
+     RangeCheckTooLarge(usize),
+     ///Cannot use on-chain data source as private data
+-    #[error("cannot use on-chain data source as 1) output for on-chain test 2) as private data 3) as input when using wasm.")]
++    #[error(
++        "cannot use on-chain data source as 1) output for on-chain test 2) as private data 3) as input when using wasm."
++    )]
+     OnChainDataSource,
+     /// Missing data source
+     #[error("missing data source")]
+diff --git a/src/graph/model.rs b/src/graph/model.rs
+index 99b6bd1..9baa95d 100644
+--- a/src/graph/model.rs
++++ b/src/graph/model.rs
+@@ -1,22 +1,22 @@
++use super::GraphSettings;
+ use super::errors::GraphError;
+ use super::extract_const_quantized_values;
+ use super::node::*;
+ use super::vars::*;
+-use super::GraphSettings;
++use crate::circuit::Input;
++use crate::circuit::InputType;
++use crate::circuit::Unknown;
+ use crate::circuit::hybrid::HybridOp;
+ use crate::circuit::region::ConstantsMap;
+ use crate::circuit::region::RegionCtx;
+ use crate::circuit::region::RegionSettings;
+ use crate::circuit::table::Range;
+-use crate::circuit::Input;
+-use crate::circuit::InputType;
+-use crate::circuit::Unknown;
+ use crate::fieldutils::IntegerRep;
+ use crate::tensor::ValType;
+ use crate::{
+-    circuit::{lookup::LookupOp, BaseConfig as PolyConfig, CheckMode, Op},
+-    tensor::{Tensor, ValTensor},
+     RunArgs,
++    circuit::{BaseConfig as PolyConfig, CheckMode, Op, lookup::LookupOp},
++    tensor::{Tensor, ValTensor},
+ };
+ use halo2curves::bn256::Fr as Fp;
+ 
+diff --git a/src/graph/modules.rs b/src/graph/modules.rs
+index 61369e3..abe264d 100644
+--- a/src/graph/modules.rs
++++ b/src/graph/modules.rs
+@@ -1,7 +1,7 @@
++use crate::circuit::modules::Module;
+ use crate::circuit::modules::polycommit::{PolyCommitChip, PolyCommitConfig};
+-use crate::circuit::modules::poseidon::spec::{PoseidonSpec, POSEIDON_RATE, POSEIDON_WIDTH};
++use crate::circuit::modules::poseidon::spec::{POSEIDON_RATE, POSEIDON_WIDTH, PoseidonSpec};
+ use crate::circuit::modules::poseidon::{PoseidonChip, PoseidonConfig};
+-use crate::circuit::modules::Module;
+ use crate::circuit::region::ConstantsMap;
+ use crate::tensor::{Tensor, ValTensor};
+ use halo2_proofs::circuit::Layouter;
+diff --git a/src/graph/node.rs b/src/graph/node.rs
+index c112667..a27e34e 100644
+--- a/src/graph/node.rs
++++ b/src/graph/node.rs
+@@ -14,14 +14,14 @@ use super::VarScales;
+ use super::Visibility;
+ 
+ // Import operation types for different circuit components
+-use crate::circuit::hybrid::HybridOp;
+-use crate::circuit::lookup::LookupOp;
+-use crate::circuit::poly::PolyOp;
+ use crate::circuit::CircuitError;
+ use crate::circuit::Constant;
+ use crate::circuit::Input;
+ use crate::circuit::Op;
+ use crate::circuit::Unknown;
++use crate::circuit::hybrid::HybridOp;
++use crate::circuit::lookup::LookupOp;
++use crate::circuit::poly::PolyOp;
+ 
+ // Import graph error types for EZKL
+ #[cfg(all(feature = "ezkl", not(target_arch = "wasm32")))]
+diff --git a/src/graph/postgres.rs b/src/graph/postgres.rs
+index aef4d1f..ff4bbd4 100644
+--- a/src/graph/postgres.rs
++++ b/src/graph/postgres.rs
+@@ -8,13 +8,13 @@ use std::sync::Arc;
+ use std::time::Duration;
+ use std::{fmt, pin::Pin};
+ use tokio::task::JoinHandle;
++use tokio_postgres::NoTls;
+ #[doc(inline)]
+ pub use tokio_postgres::config::{
+     ChannelBinding, Host, LoadBalanceHosts, SslMode, TargetSessionAttrs,
+ };
+ use tokio_postgres::tls::NoTlsStream;
+-use tokio_postgres::NoTls;
+-use tokio_postgres::{error::DbError, types::ToSql, Error, Row, Socket, ToStatement};
++use tokio_postgres::{Error, Row, Socket, ToStatement, error::DbError, types::ToSql};
+ 
+ /// Connection configuration.
+ ///
+diff --git a/src/graph/vars.rs b/src/graph/vars.rs
+index 1135d75..a0e1ef6 100644
+--- a/src/graph/vars.rs
++++ b/src/graph/vars.rs
+@@ -1,15 +1,15 @@
+ use std::fmt::Display;
+ 
++use crate::RunArgs;
+ use crate::tensor::TensorType;
+ use crate::tensor::{ValTensor, VarTensor};
+-use crate::RunArgs;
+ use halo2_proofs::plonk::{Column, ConstraintSystem, Instance};
+ use halo2curves::ff::PrimeField;
+ use itertools::Itertools;
+ use log::debug;
+ #[cfg(feature = "python-bindings")]
+ use pyo3::{
+-    exceptions::PyValueError, FromPyObject, IntoPy, PyObject, PyResult, Python, ToPyObject,
++    FromPyObject, IntoPy, PyObject, PyResult, Python, ToPyObject, exceptions::PyValueError,
+ };
+ use serde::{Deserialize, Serialize};
+ #[cfg(all(feature = "ezkl", not(target_arch = "wasm32")))]
+diff --git a/src/pfsys/evm/aggregation_kzg.rs b/src/pfsys/evm/aggregation_kzg.rs
+index 26a418e..9cb05c3 100644
+--- a/src/pfsys/evm/aggregation_kzg.rs
++++ b/src/pfsys/evm/aggregation_kzg.rs
+@@ -10,12 +10,12 @@ use halo2_proofs::{
+     plonk::{Circuit, ConstraintSystem},
+ };
+ use halo2_wrong_ecc::{
++    EccConfig,
+     integer::rns::Rns,
+     maingate::{
+         MainGate, MainGateConfig, MainGateInstructions, RangeChip, RangeConfig, RangeInstructions,
+         RegionCtx,
+     },
+-    EccConfig,
+ };
+ use halo2curves::bn256::{Bn256, Fq, Fr, G1Affine};
+ use halo2curves::ff::PrimeField;
+@@ -24,16 +24,16 @@ use itertools::Itertools;
+ use log::debug;
+ use log::trace;
+ use rand::rngs::OsRng;
+-use snark_verifier::loader::native::NativeLoader;
+ use snark_verifier::loader::EcPointLoader;
++use snark_verifier::loader::native::NativeLoader;
+ use snark_verifier::{
+     loader,
+     pcs::{
++        AccumulationScheme, AccumulationSchemeProver,
+         kzg::{
+             Bdfg21, KzgAccumulator, KzgAs, KzgSuccinctVerifyingKey, LimbsEncoding,
+             LimbsEncodingInstructions,
+         },
+-        AccumulationScheme, AccumulationSchemeProver,
+     },
+     system,
+     util::arithmetic::fe_to_limbs,
+diff --git a/src/pfsys/mod.rs b/src/pfsys/mod.rs
+index 88f0f52..2096ba7 100644
+--- a/src/pfsys/mod.rs
++++ b/src/pfsys/mod.rs
+@@ -1,3 +1,6 @@
++/// Caching helpers
++pub mod cache;
++
+ /// EVM related proving and verification
+ pub mod evm;
+ 
+diff --git a/src/tensor/errors.rs b/src/tensor/errors.rs
+index 4681935..fd374fa 100644
+--- a/src/tensor/errors.rs
++++ b/src/tensor/errors.rs
+@@ -1,6 +1,6 @@
+ use thiserror::Error;
+ 
+-use super::{ops::DecompositionError, DataFormat};
++use super::{DataFormat, ops::DecompositionError};
+ 
+ /// A wrapper for tensor related errors.
+ #[derive(Debug, Error)]
+diff --git a/tests/wasm.rs b/tests/wasm.rs
+index d033367..974d6fe 100644
+--- a/tests/wasm.rs
++++ b/tests/wasm.rs
+@@ -7,10 +7,10 @@ mod wasm32 {
+         kzgCommit, pkValidation, poseidonHash, proofValidation, prove, settingsValidation,
+         srsValidation, u8_array_to_u128_le, verify, verifyAggr, vkValidation, witnessValidation,
+     };
++    use ezkl::circuit::modules::Module;
+     use ezkl::circuit::modules::polycommit::PolyCommitChip;
+-    use ezkl::circuit::modules::poseidon::spec::{PoseidonSpec, POSEIDON_RATE, POSEIDON_WIDTH};
+     use ezkl::circuit::modules::poseidon::PoseidonChip;
+-    use ezkl::circuit::modules::Module;
++    use ezkl::circuit::modules::poseidon::spec::{POSEIDON_RATE, POSEIDON_WIDTH, PoseidonSpec};
+     use ezkl::graph::GraphCircuit;
+     use ezkl::graph::{GraphSettings, GraphWitness};
+     use ezkl::pfsys;

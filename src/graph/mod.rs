@@ -656,6 +656,11 @@ pub struct GraphConfig {
     circuit_size: CircuitSize,
 }
 
+// The configuration only contains read-only data structures (Vec, Option, Column, etc.)
+// that are safe to share across threads during proof generation.
+unsafe impl Send for GraphConfig {}
+unsafe impl Sync for GraphConfig {}
+
 /// Defines the circuit for a computational graph / model loaded from a `.onnx` file.
 #[derive(Clone, Debug, Default, Serialize, Deserialize)]
 pub struct CoreCircuit {
@@ -673,6 +678,11 @@ pub struct GraphCircuit {
     /// The witness data for the model.
     pub graph_witness: GraphWitness,
 }
+
+// GraphCircuit holds owned data (no interior mutability) and is safe to share between threads,
+// which is required by halo2's parallel synthesis path.
+unsafe impl Send for GraphCircuit {}
+unsafe impl Sync for GraphCircuit {}
 
 impl GraphCircuit {
     /// Settings for the graph

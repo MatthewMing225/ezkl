@@ -10,16 +10,16 @@ use std::collections::HashMap;
 use halo2_proofs::halo2curves::bn256::Fr as Fp;
 use halo2_proofs::poly::commitment::{Blind, CommitmentScheme, Params};
 use halo2_proofs::{circuit::*, plonk::*};
-use halo2curves::bn256::G1Affine;
-use halo2curves::group::prime::PrimeCurveAffine;
-use halo2curves::group::Curve;
 use halo2curves::CurveAffine;
+use halo2curves::bn256::G1Affine;
+use halo2curves::group::Curve;
+use halo2curves::group::prime::PrimeCurveAffine;
 
 use crate::circuit::region::ConstantsMap;
 use crate::tensor::{Tensor, ValTensor, ValType, VarTensor};
 
-use super::errors::ModuleError;
 use super::Module;
+use super::errors::ModuleError;
 
 /// The number of instance columns used by the PolyCommit hash function
 pub const NUM_INSTANCE_COLUMNS: usize = 0;
@@ -50,19 +50,36 @@ impl PolyCommitChip {
     ) -> Vec<G1Affine> {
         let k = params.k();
         let domain = halo2_proofs::poly::EvaluationDomain::new(2, k);
-        let n = 2_u64.pow(k) - num_unusable_rows as u64;
-        let num_poly = (message.len() / n as usize) + 1;
+        let total_rows = 2_u64.pow(k);
+
+        assert!(
+            num_unusable_rows as u64 <= total_rows,
+            "num_unusable_rows exceeds domain size"
+        );
+
+        let usable_rows = total_rows - num_unusable_rows as u64;
+        assert!(
+            usable_rows > 0,
+            "no usable rows available in the evaluation domain"
+        );
+
+        if message.is_empty() {
+            return vec![];
+        }
+
+        let usable_rows_usize = usable_rows as usize;
+        let num_poly = (message.len() + usable_rows_usize - 1) / usable_rows_usize;
         let mut poly = vec![domain.empty_lagrange(); num_poly];
 
         (0..num_unusable_rows).for_each(|i| {
             for p in &mut poly {
-                p[(n + i as u64) as usize] = Blind::default().0;
+                p[(usable_rows + i as u64) as usize] = Blind::default().0;
             }
         });
 
         for (i, m) in message.iter().enumerate() {
-            let x = i / (n as usize);
-            let y = i % (n as usize);
+            let x = i / usable_rows_usize;
+            let y = i % usable_rows_usize;
             poly[x][y] = *m;
         }
 

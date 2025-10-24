@@ -1,6 +1,6 @@
 use std::thread;
 
-use criterion::{black_box, criterion_group, criterion_main, Criterion};
+use criterion::{Criterion, black_box, criterion_group, criterion_main};
 use halo2curves::{bn256::Fr as F, ff::Field};
 use maybe_rayon::{
     iter::{IndexedParallelIterator, IntoParallelRefIterator, ParallelIterator},

@@ -11,7 +11,7 @@ use maybe_rayon::prelude::{IntoParallelIterator, ParallelIterator};
 
 use crate::{
     circuit::CircuitError,
-    fieldutils::{integer_rep_to_felt, IntegerRep},
+    fieldutils::{IntegerRep, integer_rep_to_felt},
     tensor::{Tensor, TensorType},
 };
 
