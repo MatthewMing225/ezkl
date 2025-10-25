@@ -14,11 +14,11 @@ use crate::{
     arithmetic::{eval_polynomial, parallelize, CurveAffine},
     icicle::icicle_invert,
     plonk::{self, Error},
-    poly::EvaluationDomain,
     poly::{
         commitment::{Blind, Params},
         Coeff, ExtendedLagrangeCoeff, LagrangeCoeff, Polynomial, ProverQuery, Rotation,
     },
+    poly::EvaluationDomain,
     transcript::{EncodedChallenge, TranscriptWrite},
 };
 
@@ -43,8 +43,7 @@ impl<C: CurveAffine> PermutationCommitJob<C> {
         let permutation_product_commitment_projective =
             params.commit_lagrange_with_stream(&self.z_lagrange, self.blind, &stream);
         let permutation_product_poly = domain.lagrange_to_coeff_stream(self.z_lagrange, &stream);
-        let permutation_product_coset =
-            domain.coeff_to_extended(&permutation_product_poly, &stream);
+        let permutation_product_coset = domain.coeff_to_extended(&permutation_product_poly, &stream);
 
         stream.synchronize().unwrap();
         stream.destroy().unwrap();
@@ -173,8 +172,7 @@ impl Argument {
                         Any::Instance => instance,
                     };
                     parallelize(&mut modified_values, |modified_values, start| {
-                        let mut deltaomega =
-                            deltaomega * &omega.pow_vartime([start as u64, 0, 0, 0]);
+                        let mut deltaomega = deltaomega * &omega.pow_vartime([start as u64, 0, 0, 0]);
                         for (modified_values, value) in modified_values
                             .iter_mut()
                             .zip(values[column.index()][start..].iter())
